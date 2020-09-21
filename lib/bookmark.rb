@@ -1,9 +1,10 @@
 class Bookmark
-  attr_reader :title, :url, :tags
+  attr_reader :title, :url, :tags, :id
   attr_accessor :description
   include BookmarkHelper
 
-  def initialize(title, url, tags, description)
+  def initialize(id, title, url, tags, description)
+    @id = id
     @title = title
     @url = url
     @tags = tags
@@ -20,10 +21,3 @@ class Bookmark
     bookmark
   end
 end
-
-bookmark = Bookmark.new(
-  'Coder Academy',
-  'https://coderacademy.com.au',
-  %w[code learn],
-  'this is a place I want to study at'
-)
