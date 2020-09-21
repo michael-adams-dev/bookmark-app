@@ -1,27 +1,29 @@
 class Bookmark
   attr_reader :title, :url, :tags
   attr_accessor :description
+  include BookmarkHelper
 
   def initialize(title, url, tags, description)
-    # this is where we put instance variables that apply to 
-    # objects of this class
     @title = title
     @url = url
     @tags = tags
     @description = description
-	end
+  end
+
+  def self.bookmark_user_input
+    bookmark = {}
+    INPUTS.each do |input|
+      puts "What's the #{input}?"
+      print '> '
+      bookmark[input] = gets.chomp
+    end
+    bookmark
+  end
 end
 
 bookmark = Bookmark.new(
-  "Coder Academy", 
-  "https://coderacademy.com.au",
-  ["code", "learn"],
-  "this is a place I want to study at"
+  'Coder Academy',
+  'https://coderacademy.com.au',
+  %w[code learn],
+  'this is a place I want to study at'
 )
-
-p bookmark.title
-
-bookmark.description = "I'm now studying here"
-
-
-
