@@ -1,4 +1,8 @@
+require_relative 'bookmark_helper'
+
 class Menu
+  include BookmarkHelper
+
   def initialize
     @bookmarks = []
   end
@@ -15,9 +19,18 @@ class Menu
     gets.chomp.to_i
   end
 
+  def terminal_table
+    rows = @bookmarks.map do |bookmark|
+      [bookmark.id, bookmark.title, bookmark.url, bookmark.description, bookmark.tags]
+    end
+    table = Terminal::Table.new({headings: HEADINGS, rows: rows})
+    puts table
+  end
+
   def create_bookmark 
     bookmark = Bookmark.bookmark_user_input
     @bookmarks << Bookmark.new(
+      @bookmarks.length + 1,
       bookmark[:title],
       bookmark[:url],
       bookmark[:tags],
@@ -30,7 +43,7 @@ class Menu
       display_menu
       case selection
       when 1
-        p @bookmarks
+        terminal_table
       when 2
         create_bookmark
       when 3
