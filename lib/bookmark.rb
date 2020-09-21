@@ -1,5 +1,6 @@
 class Bookmark
-  attr_accessor :title, :url, :tags, :description
+  attr_reader :title, :url, :tags
+  attr_accessor :description
 
   def initialize(title, url, tags, description)
     # this is where we put instance variables that apply to 
@@ -19,6 +20,8 @@ bookmark = Bookmark.new(
 )
 
 p bookmark.title
+
+bookmark.description = "I'm now studying here"
 
 
 
