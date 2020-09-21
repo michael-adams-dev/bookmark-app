@@ -1,3 +1,4 @@
+require 'terminal-table'
 require_relative 'menu'
 require_relative 'bookmark_helper'
 require_relative 'bookmark'
