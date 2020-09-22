@@ -4,7 +4,7 @@ class Menu
   include BookmarkHelper
 
   def initialize
-    @bookmarks = []
+    @bookmark_repository = BookmarkRepository.new
   end
 
   def display_menu
@@ -27,17 +27,6 @@ class Menu
     puts table
   end
 
-  def create_bookmark 
-    bookmark = Bookmark.bookmark_user_input
-    @bookmarks << Bookmark.new(
-      @bookmarks.length + 1,
-      bookmark[:title],
-      bookmark[:url],
-      bookmark[:tags],
-      bookmark[:description]
-    )
-  end
-
   def router
     loop do
       display_menu
@@ -45,8 +34,9 @@ class Menu
       when 1
         terminal_table
       when 2
-        create_bookmark
+        @bookmark_repository.create_bookmark
       when 3
+        @bookmark_repository.write_bookmarks
         exit
       end
     end
